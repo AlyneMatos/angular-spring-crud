@@ -5,19 +5,17 @@ import { Course } from '../model/course';
 import { Observable, delay, first, tap } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CoursesService {
+  private readonly API = 'api/courses';
 
-  private readonly API = "/assets/courses.json";
-
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   list() {
-    return this.httpClient.get<Course[]>(this.API)
-    .pipe(
+    return this.httpClient.get<Course[]>(this.API).pipe(
       first(),
-      tap(courses => console.log(courses))
-    )
+      tap((courses) => console.log(courses))
+    );
   }
 }
